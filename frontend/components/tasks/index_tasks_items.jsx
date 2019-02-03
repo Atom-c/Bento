@@ -1,9 +1,8 @@
 import React from 'react';
-import HTML5Backend from 'react-dnd-html5-backend';
-import { ItemTypes } from "../../util/dnd_constants.js";
+import { ItemTypes } from '../../util/dnd_constants.js';
 import { Route, NavLink, Link } from 'react-router-dom';
 import { updateTask, deleteTask } from '../../actions/task_actions';
-import { DragDropContext, DragSource, DropTarget, DragLayer } from 'react-dnd';
+import { DragSource, DropTarget, DragLayer } from 'react-dnd';
 
 const taskSource = {
   beginDrag(props, monitor, component) {
@@ -74,18 +73,18 @@ class TaskIndexItem extends React.Component {
     // this.handleInput       =  this.handleInput.bind(this);
     // this.handleUpdateTask  =  this.handleUpdateTask.bind(this);
     // this.handleEnter       =  this.handleEnter.bind(this);
-    this.state = {...this.props};
-    console.log(this.state);
+    this.state = { ...this.props };
+    // console.log(this.state);
   }
 
   componentDidMount() {
     // let dupeLength = []
     // let filtered = this.props.tasks.filter((task) => {
-    //   console.log("%ctaskid, stateid", "color: yellow; background-color:black;", task.id, this.state.id);
+    //   console.log('%ctaskid, stateid', 'color: yellow; background-color:black;', task.id, this.state.id);
     //   if (task.id === this.state.id) dupeLength.push(task);
     //
     // });
-    // console.log("%cfilter length", "color: pink; background-color:black;", filtered.length, dupeLength.length);
+    // console.log('%cfilter length', 'color: pink; background-color:black;', filtered.length, dupeLength.length);
     //
     // if (dupeLength.length !== 0) {
     //   this.props.updateTask(this.state);
@@ -158,7 +157,6 @@ class TaskIndexItem extends React.Component {
 
   render () {
     const {
-      key,
       task,
       project_id,
       hovered,
@@ -167,18 +165,17 @@ class TaskIndexItem extends React.Component {
       isDragging,
     } = this.props;
 
-    const opacity = isDragging ? 0 : 1;
-    const cursor = isDragging ? "-webkit-grabbing" : "-webkit-grab";
+    const opacity  =  isDragging ? 0 : 1;
+    const cursor   =  isDragging ? '-webkit-grabbing !important' : '-webkit-grab !important';
 
     return connectDropTarget(connectDragSource(
       <li
-        key        =  { `key-${key}` }
-        className  =  {`${task.checked ? 'task-item-true' : 'task-item-false'}`}
-        style      =  {{ opacity }}
+        className  =  { `task-item-${task.checked ? true : false}` }
+        style      =  { { opacity } }
       >
         <div
-          id        = {`check-${task.id}`}
-          className = {`${task.checked ? 'check-true' : 'check-false'}`}
+          id        = { `check-${task.id}` }
+          className = { `check-${task.checked ? true : false}` }
           onClick   = { this.handleCheck }
         >
           <div className='hover-check'>✔️</div>

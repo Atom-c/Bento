@@ -3,6 +3,8 @@
     json.partial! 'project',
                   project: project
   end
+
+  json.indicesOrder @projects.pluck(:id).uniq
 end
 
 # @projects = Project
@@ -23,13 +25,16 @@ end
 #               :title,
 #
 # make_task_arrays = project.tasks.map(&:id)
+# => changed to #pluck(:id)
 #
 # json.tasks make_task_arrays
 #
 # json.extract! from its arg, pulls from the key passed into it as a keyed arg
 #
 # json will extract and make each of its key arguments equal to the matching value
-# found in the record it looks through, again from above
+# found in the record it looks through, again from above (|project|
+# block iteration element being the project mentioned in json.extract! first
+# line parameter)
 #
 # json.new_key_name will set a key here as well to whatever this key name is,
 # setting a key tasks: the array we made, make_task_arrays
